@@ -10,7 +10,8 @@ namespace IiSM4Lab
 {
     class Program
     {
-        public static double f(double x)
+        #region простой интеграл
+        public static double Standard_f(double x)
         {
         if (x < 1)
             {
@@ -26,25 +27,61 @@ namespace IiSM4Lab
         {
             var exp = new Exponential(1);
             double randomSample = exp.Sample();
-            //Console.WriteLine(exp + "   " + randomSample);
             return randomSample;
         }
 
-        public static double integral()
+        public static double Standard_integral()
         {
             int size = 10000;
             double integrale = 0.0;
             for (int i = 0; i < size; i++)
             {
                 double x = var_x();
-                integrale += f(x);
+                integrale += Standard_f(x);
             }
             return integrale/size;
         }
+#endregion 
+
+        #region двойной интеграл
+        public static double Double_f(double x, double y)
+        {
+            if ((x < 0) || (x > 1) || (y < 0) || (y > 2))
+            {
+                return 0;
+            }
+            else
+            {
+                return (Math.Pow(x, 2) + Math.Pow(y, 2)) * Math.Exp(x + y);
+                //return (Math.Pow(x, 2) + Math.Pow(y, 2));
+            }
+        }
+
+        public static double Double_var(int upper)
+        {
+            var cu = new ContinuousUniform(0, upper);
+            double randomSample = cu.Sample();
+            return randomSample;
+        }
+
+        public static double Double_integral()
+        {
+            int size = 10000;
+            double integrale = 0.0;
+            for (int i = 0; i < size; i++)
+            {
+                double x = Double_var(1);
+                double y = Double_var(2);
+                integrale += Double_f(x, y);
+            }
+            return integrale / size;
+        }
+        #endregion
 
         static void Main(string[] args)
         {
-            Console.WriteLine(integral());
+            Console.WriteLine("Standard integral  :  " + Standard_integral());
+            Console.WriteLine("Double integral  :  " + Double_integral());
             Console.ReadLine();
         }
     }
