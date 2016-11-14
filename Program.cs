@@ -52,8 +52,7 @@ namespace IiSM4Lab
             }
             else
             {
-                return (Math.Pow(x, 2) + Math.Pow(y, 2)) * Math.Exp(x + y);
-                //return (Math.Pow(x, 2) + Math.Pow(y, 2));
+                return (Math.Pow(x, 2) + Math.Pow(y, 2));
             }
         }
 
@@ -74,7 +73,7 @@ namespace IiSM4Lab
                 double y = Double_var(2);
                 integrale += Double_f(x, y);
             }
-            return integrale / size;
+            return 2 * integrale / size;
         }
         #endregion
 
